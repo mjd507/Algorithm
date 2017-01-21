@@ -1,4 +1,3 @@
-package LeetCode.JavaCodes;
 /**
 The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: 
 (you may want to display this pattern in a fixed font for better legibility)
@@ -25,7 +24,8 @@ public class _006ZigZagConversion {
     		int zu = length / 2*(numRows - 1);
     		int left = length % 2*(numRows - 1);
     		String res = "";
-    		for(int i = 0; i < zu; i++){
+    		for(int i = 0; i < numRows; i++){
+    			String st = "";
     			
     		}
 		return s;
