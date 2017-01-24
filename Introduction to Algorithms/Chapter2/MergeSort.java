@@ -5,45 +5,47 @@ public class MergeSort{
 
 	public static void main(String[] args) {
 		Random random = new Random();
-		int[] arr = new int[]{3, 9, 16, 2, 42,67};
-		// for (int i = 0; i < 10; i++) {
-		// 	arr[i] = random.nextInt(10);
-		// }
-		System.out.println(Arrays.toString(arr));
+		int[] arr = new int[100000];
+		for (int i = 0; i < 100000; i++) {
+			arr[i] = random.nextInt(100000);
+		}
+		//System.out.println(Arrays.toString(arr));
 		_CalculateTimeUtils timeUtils = new _CalculateTimeUtils() {
 			@Override
 			public void method() {
-				mergeSort(arr);
+				int[] result = new int[arr.length];
+				mergeSort(arr,0, arr.length - 1, result);
 			}
 		};
 		timeUtils.outputMethodTime();
-		System.out.println(Arrays.toString(arr));
+		//System.out.println(Arrays.toString(arr));
 	}
 
-	//将一个数组的两个有序的部分合并到一个有序数组中。
-	public static void mergeSort(int[] arr){
-		int[] result = new int[arr.length];
-		
-		int first = 0, mid = arr.length/2, last = arr.length;
-		int m = mid;
-		int k = 0;
-		while(first < mid && m < last){
-			if(arr[first] < arr[m]){
-				result[k++] = arr[first++];
-			}else{
-				result[k++] = arr[m++];
+	public static void mergeSort(int[] arr, int first, int last, int[] temp){
+		if(first < last){
+			int mid = (first + last)/2;
+			
+			mergeSort(arr, first, mid, temp); //左边递归
+			mergeSort(arr, mid + 1, last, temp); //右边递归
+
+			int m = mid + 1;
+			int k = first;
+			while(first <= mid && m <= last){
+				if(arr[first] < arr[m]){
+					temp[k++] = arr[first++];
+				}else {
+					temp[k++] = arr[m++];
+				}
 			}
-		}
-
-		while(first < mid){
-			result[k++] = arr[first++];
-		}
-		while(m < last){
-			result[k++] = arr[m++];
-		}
-
-		for (int i = 0; i < last; i++) {
-			arr[i] = result[i];
+			while(first <= mid){
+				temp[k++] = arr[first++];
+			}
+			while(m <= last){
+				temp[k++] = arr[m++];
+			}
+			for (int i = 0; i < k; i++) {
+				arr[i] = temp[i];
+			}
 		}
 	}
 

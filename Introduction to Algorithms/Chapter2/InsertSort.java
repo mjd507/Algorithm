@@ -5,8 +5,8 @@ public class InsertSort{
 
 	public static void main(String[] args) {
 		Random random = new Random();
-		int[] arr = new int[10000];
-		for (int i = 0; i < 10000; i++) {
+		int[] arr = new int[100000];
+		for (int i = 0; i < 100000; i++) {
 			arr[i] = random.nextInt(100000);
 		}
 		//System.out.println(Arrays.toString(arr));
