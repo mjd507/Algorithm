@@ -3,7 +3,7 @@ public class BinarySearch{
 
 	public static void main(String[] args) {
 		int[] arr = new int[]{12,23,28,34,46,61,87,99};
-		int index = binarySearch(arr,0,arr.length - 1, 12);
+		int index = binarySearch(arr,0,arr.length - 1, 11);
 		System.out.println(index);
 	}
 
@@ -13,18 +13,18 @@ public class BinarySearch{
 		// if value < mid，then find mid value between first to mid; vice versa.
 		// repeat until find the value
 
-		if(first < last){
-			int mid = (last + first)/2;
+		while(first <= last){
+			int mid = (first + last)/2;
 			if(value == arr[mid]){ 
 				return mid;
 			}
 			if(value < arr[mid]){ //left
-				return binarySearch(arr,first,mid - 1, value);
+				last = mid - 1;
 			}else{ //right
-				return binarySearch(arr, mid, last + 1, value);
+				first = mid + 1;
 			}
 		}
-		return first;
+		return -1;
 
 	}
 
