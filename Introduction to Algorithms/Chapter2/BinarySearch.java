@@ -3,7 +3,7 @@ public class BinarySearch{
 
 	public static void main(String[] args) {
 		int[] arr = new int[]{12,23,28,34,46,61,87,99};
-		int index = binarySearch(arr,0,arr.length - 1, 28);
+		int index = binarySearch(arr,0,arr.length - 1, 1);
 		System.out.println(index);
 	}
 
