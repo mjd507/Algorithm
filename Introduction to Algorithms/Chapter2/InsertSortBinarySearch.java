@@ -4,34 +4,24 @@ import java.util.Arrays;
 public class InsertSortBinarySearch {
 
 	public static void main(String[] args) {
-		int[] arr = new int[]{12,23,28,34,46,61,87,99};
-		//System.out.println(Arrays.toString(arr));
-		//int index = findIndex(arr,0, arr.length-1, 13);
-		//System.out.println(index);
-		insertSortBinarySearch(arr);
-		System.out.println(Arrays.toString(arr));
+		int[] arr = new int[]{12,39,28,34,46,1,87,99};
 
+		insertSortBinarySearch(arr);
+
+		System.out.println(Arrays.toString(arr));
 	}
 
 	public static void insertSortBinarySearch(int[] arr){
+		//System.out.println(Arrays.toString(arr));
 		for(int i = 0; i < arr.length - 1; i ++){
-			// for(int j = i + 1; j > 0; j --){
-			// 	if(arr[j-1] > arr [j]){
-			// 		int temp = arr[j-1];
-			// 		arr[j-1] = arr[j];
-			// 		arr[j] = temp;
-			// 	}else{
-			// 		break;
-			// 	}
-			// }
-
 			int index = findIndex(arr, 0, i, arr[i+1]);
-
+			//System.out.println("insert pos = "+ index);
+			int temp = arr[i+1];
 			for (int j = i+1; j > index; j--) {
-				arr[j] = arr[i--];
+				arr[j] = arr[j-1];
 			}
-			arr[index] = arr[i+1];
-
+			arr[index] = temp;
+			//System.out.println("iter result = "+Arrays.toString(arr));
 		}
 	}
 
