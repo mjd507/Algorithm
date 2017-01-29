@@ -4,11 +4,20 @@ import java.util.Arrays;
 public class InsertSortBinarySearch {
 
 	public static void main(String[] args) {
-		int[] arr = new int[]{12,39,28,34,46,1,87,99};
-
-		insertSortBinarySearch(arr);
-
-		System.out.println(Arrays.toString(arr));
+		Random random = new Random();
+		int[] arr = new int[100000];
+		for (int i = 0; i < 100000; i++) {
+			arr[i] = random.nextInt(100000);
+		}
+		//System.out.println(Arrays.toString(arr));
+		_CalculateTimeUtils timeUtils = new _CalculateTimeUtils() {
+			@Override
+			public void method() {
+				insertSortBinarySearch(arr);
+			}
+		};
+		timeUtils.outputMethodTime();
+		//System.out.println(Arrays.toString(arr));
 	}
 
 	public static void insertSortBinarySearch(int[] arr){
