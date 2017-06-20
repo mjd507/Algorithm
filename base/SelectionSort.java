@@ -5,11 +5,11 @@ public class SelectionSort{
 
 	public static void main(String[] args) {
 		Random random = new Random();
-		int[] arr = new int[10];
-		for (int i = 0; i < 10; i++) {
-			arr[i] = random.nextInt(100);
+		int[] arr = new int[20000];
+		for (int i = 0; i < 20000; i++) {
+			arr[i] = random.nextInt(20000);
 		}
-		System.out.println(Arrays.toString(arr));
+		//System.out.println(Arrays.toString(arr));
 		_CalculateTimeUtils timeUtils = new _CalculateTimeUtils() {
 			@Override
 			public void method() {
@@ -17,10 +17,9 @@ public class SelectionSort{
 			}
 		};
 		timeUtils.outputMethodTime();
-		System.out.println(Arrays.toString(arr));
+		//System.out.println(Arrays.toString(arr));
 	}
 
-	/**冒泡排序*/
 	public static void selectionSort(int[] arr){
 		int len = arr.length;
 		for (int i = 0; i < len - 1; i++) {
