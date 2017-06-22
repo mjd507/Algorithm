@@ -1,36 +1,34 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class _005_LongestPalindromicSubstring{
 
+    public static int maxLen = 0;
+    public static int startIndex = 0;
+
 	public static void main(String[] args) {
-		String str = longestPalindrome("abcda");
+		String str = longestPalindrome("cbbd");
 		System.out.println(str);
 	}
 
+    //abcbabc
 	public static String longestPalindrome(String s) {
-		if(s == null || s.length() == 0) return "";
-        char[] arr = s.toCharArray();
-        HashMap<String,ArrayList<Integer>> map = new HashMap<>();
-        int longest = 0;
-        int[] index = new int[2];
-        for (int i = 0; i < arr.length; i++) {
-        	String element = arr[i] + "";
-        	if(map.get(element) == null){
-        		ArrayList<Integer> list = new ArrayList<>();
-        		list.add(i);
-        		map.put(element,list);
-        	}else{
-        		ArrayList<Integer> list = map.get(element);
-        		list.add(i);
-        		int len = i - list.get(0);
-        		if(len > longest){
-        			longest = len;
-        			index[0] = list.get(0);
-        			index[1] = i;
-        		}
-        	}
+        int len = s.length();
+        if(len < 2) return s;
+        for (int i = 0; i < len; i++) {
+            findLongest(s, i, i); //奇数最长回文
+            findLongest(s, i, i+1); //偶数最长回文
         }
-        return s.substring(index[0],index[1]+1);
+        return s.substring(startIndex, startIndex + maxLen);
+    }
+
+    public static void findLongest(String s, int j, int k){
+        while(j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)){
+            j--;
+            k++;
+        }
+        if(maxLen < k-j-1){
+            startIndex = j + 1;
+            maxLen = k-j-1;
+        }
     }
 }
