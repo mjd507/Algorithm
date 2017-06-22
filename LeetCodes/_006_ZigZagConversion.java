@@ -1,34 +1,47 @@
-/**
-The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: 
-(you may want to display this pattern in a fixed font for better legibility)
-
-P      A       H       N
-A  P  L   S   I    I   G
-Y      I        R
-And then read line by line: "PAHNAPLSIIGYIR"
-Write the code that will take a string and make this conversion given a number of rows:
-
-string convert(string text, int nRows);
-convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
-
- */
-public class _006ZigZagConversion {
+import java.lang.StringBuilder;
+public class _006_ZigZagConversion {
 
 	public static void main(String[] args) {
-
+	    String result = convert("PAYPALISHIRING",3);
+	    System.out.println(result);
 	}
-
-    public String convert(String s, int numRows) {
-    		//n行，可以分为  2（n-1）组数据
-    		int length = s.length();
-    		int zu = length / 2*(numRows - 1);
-    		int left = length % 2*(numRows - 1);
-    		String res = "";
-    		for(int i = 0; i < numRows; i++){
-    			String st = "";
-    			
-    		}
-		return s;
-    }
 	
+	/**
+	 * abcdefg
+	 *
+	 * a # # g
+	 * b # f #
+	 * c e # #
+	 * d # # #
+	 */
+	public static String convert(String s, int numRows) {
+	    int len = s.length();
+	    char[] arr = s.toCharArray();
+	    StringBuilder[] builders = new StringBuilder[numRows]; 
+	    for (int i = 0; i < numRows; i++) {
+	    	builders[i] = new StringBuilder();
+	    }
+
+	    int cursor = 0;
+	    while(cursor < len){
+	    	//从上到下
+	    	for (int index = 0; index < numRows; index++) {
+	    		if(cursor < len){
+	    			builders[index].append(arr[cursor]);
+	    			cursor++;
+	    		}
+	    	}
+	    	//从下到上
+	    	for (int index = numRows - 2; index >= 1; index--) {
+	    		if(cursor < len){
+	    			builders[index].append(arr[cursor]);
+	    			cursor++;
+	    		}
+	    	}
+	    }
+	    for (int i = 1; i < numRows; i++) {
+	    	builders[0].append(builders[i]);
+	    }
+		return builders[0].toString();
+	}
 }
