@@ -1,3 +1,5 @@
 *.class
 /base/*.class
 /LeetCodes/*.class
+.idea/
+Algorithm.iml
