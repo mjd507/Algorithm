@@ -2,11 +2,42 @@ import java.util.Arrays;
 public class _014_LongestCommonPrefix{
 
 	public static void main(String[] args) {
-		String[] str = {"c","c"};
-		longestCommonPrefix(str);
+		String[] str = {"aca","bca"};
+		String longest = longestCommonPrefix(str);
+        System.out.println(longest);
 	}
 
-	public static String longestCommonPrefix(String[] strs) {
+    public static String longestCommonPrefix(String[] strs){
+        if(strs.length == 0) return "";
+
+        String shortestStr = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            if(strs[i].length() < shortestStr.length()){
+                shortestStr = strs[i];
+            }
+        }
+        int len = shortestStr.length();
+
+        String longestStr = "";
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            char c = shortestStr.charAt(i);
+            for (String s : strs) {
+                if(s.charAt(i) != c){
+                    return longestStr;
+                }else{
+                    count ++;
+                }
+            }
+            if(count == strs.length){
+                longestStr += c + "";
+            }
+            count = 0;
+        }
+        return longestStr;
+    }
+
+	public static String longestCommonStr(String[] strs) {
         //["abcdefg","bcdjhgl"]
         //1. find the shortest String in given array.
         //2. list all the combines in the String. 
