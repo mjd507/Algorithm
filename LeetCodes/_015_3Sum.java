@@ -5,10 +5,11 @@ import java.util.Arrays;
 public class _015_3Sum{
 
 	public static void main(String[] args) {
-		// int[] S = [-1, 0, 1, 2, -1, -4];
+		// int[] S = {0, 0, 0, 0};
 		int[] S = {-1, 0, 0, 0, 1, 2, -1, -4};
-		//quickSort(S, 0 ,S.length-1);
-		//[-4, -1, -1, 0, 1, 2]
+		// quickSort(S, 0 ,S.length-1);
+		// System.out.println(Arrays.toString(S));
+		
 		List<List<Integer>> list = threeSum(S);
 		for (List<Integer> l : list ) {
 			for (int a : l ) {
@@ -17,54 +18,41 @@ public class _015_3Sum{
 			System.out.println();
 		}
 	}
-	
+
+	//先排序 在遍历，从剩下的数据中找两个总和为零的数
 	public static List<List<Integer>> threeSum(int[] nums){
 		int len = nums.length;
+		quickSort(nums, 0, len - 1);
+
 		List<List<Integer>> list = new ArrayList<>();
-		List<Integer> tripletsNums;
-
 		if(len < 3) return list;
-
-		int zeroCoutn = 0;
-		for (int i = 0; i < len; i++) {
-			if(nums[i] == 0){
-				zeroCoutn ++;
-			}
-		}
-		if(zeroCoutn >= 3){
-			tripletsNums = new ArrayList<>();
-			tripletsNums.add(0);
-			tripletsNums.add(0);
-			tripletsNums.add(0);
-			list.add(tripletsNums);
-		}
-
-		for (int i = 0; i < len-2; i++) {
-			for (int j = i+1; j < len - 1; j++) {
-				for (int k = j+1; k < len; k++) {
-					if(nums[i] + nums[j] + nums[k] == 0){
-						tripletsNums = new ArrayList<>();
-						tripletsNums.add(nums[i]);
-						tripletsNums.add(nums[j]);
-						tripletsNums.add(nums[k]);
-						boolean isContains = false;
-						boolean isZero = false;
-						for (List<Integer> l: list) {
-							if(l.contains(nums[i]) 
-								&& l.contains(nums[j]) 
-								&& l.contains(nums[k])
-								|| (nums[i] == nums[j] && nums[i] == 0)){
-								isContains = true;
-								break;
-							}
-						}
-						if(!isContains){
-							list.add(tripletsNums);
-						}	
-						
-					}
-				}
-			}
+		for (int i = 0; i < len - 2; i++) {
+	        if (i > 0 && nums[i] == nums[i - 1]) {
+	            continue;
+	        }
+		 	int start = i + 1, end = len - 1;
+		 	while(start < end){
+		 		int sum = nums[i] + nums[end] + nums[start];
+		 		if(sum > 0){
+		 			end --;
+		 		}else if(sum < 0){
+		 			start ++;
+		 		}else{
+		 			List<Integer> zero = new ArrayList<>();
+		 			zero.add(nums[i]);
+		 			zero.add(nums[start]);
+		 			zero.add(nums[end]);
+		 			list.add(zero);
+		 			start ++;
+		 			end --;
+		 			while(start < end && nums[start] == nums[start-1]){
+		 				start ++;
+		 			}
+		 			while(start < end && nums[end] == nums[end+1]){
+		 				end --;
+		 			}
+		 		}
+		 	}
 		}
 		return list;
 	}
@@ -72,7 +60,7 @@ public class _015_3Sum{
 	public static void quickSort(int[] nums, int startIndex, int endIndex){
 		if(startIndex >= endIndex) return;
 		int i = startIndex, j = endIndex;
-		int key = nums[startIndex];
+		int key = nums[i];
 		while(i < j){
 			while( i < j && nums[j] > key){
 				j --;
@@ -91,7 +79,7 @@ public class _015_3Sum{
 		}
 		int keyIndex = i;
 		nums[keyIndex] = key;
-		quickSort(nums, 0, keyIndex-1);
+		quickSort(nums, startIndex, keyIndex-1);
 		quickSort(nums, keyIndex+1, endIndex);
 	}
 }
