@@ -6,17 +6,11 @@ public class _015_3Sum{
 
 	public static void main(String[] args) {
 		// int[] S = {0, 0, 0, 0};
-		int[] S = {-1, 0, 0, 0, 1, 2, -1, -4};
+		int[] S = {-2,0,1,1,2};
 		// quickSort(S, 0 ,S.length-1);
 		// System.out.println(Arrays.toString(S));
-		
 		List<List<Integer>> list = threeSum(S);
-		for (List<Integer> l : list ) {
-			for (int a : l ) {
-				System.out.print(a+ " ");
-			}
-			System.out.println();
-		}
+		System.out.println(list.toString());
 	}
 
 	//先排序 在遍历，从剩下的数据中找两个总和为零的数
