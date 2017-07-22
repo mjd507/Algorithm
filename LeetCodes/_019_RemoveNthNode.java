@@ -18,4 +18,27 @@ public class _019_RemoveNthNode {
 
         return head;
     }
+
+
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode node = new ListNode(0);
+        node.next = head;
+
+        ListNode first = head;
+        int len = 0;
+        while(first != null){
+            len ++;
+            first = first.next;
+        }
+        int pos = len - n;
+        first = node;
+        while(pos > 0){
+            pos --;
+            first = first.next;
+        }
+        first.next = first.next.next;
+
+        return node.next;
+    }
+
 }
