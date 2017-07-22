@@ -43,9 +43,10 @@ public class MergeSort{
 			while(m <= last){
 				temp[k++] = arr[m++];
 			}
-			for (int i = 0; i < k; i++) {
-				arr[i] = temp[i];
-			}
+			// for (int i = 0; i < k; i++) {
+			// 	arr[i] = temp[i];
+			// }
+			System.arraycopy(temp, 0, arr, 0, k);
 		}
 	}
 
