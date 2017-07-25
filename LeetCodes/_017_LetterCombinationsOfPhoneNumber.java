@@ -15,13 +15,14 @@ public class _017_LetterCombinationsOfPhoneNumber {
         String[] letters = {"0", "1", "abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
         int len = digits.length();
         LinkedList<String> list = new LinkedList<>();
+        if(digits.trim().length() == 0) return list;
         list.add("");
         for (int i = 0; i < len; i++) {
             int index = Character.getNumericValue(digits.charAt(i));
             while(list.peek().length() == i){
                 String rvm = list.remove();
                 for(char c : letters[index].toCharArray()){
-                    list.add(c+rvm);
+                    list.add(rvm+c);
                 }
             }
         }
